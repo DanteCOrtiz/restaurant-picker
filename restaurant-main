@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+#include <cmath>
+#include <climits>
+#include <vector>
+using namespace std;
+
+void GetLineNotWS(string& inpString) {
+
+getline(cin, inpString);
+if (inpString.find_first_not_of(" \t") == std::string::npos) {
+getline(cin, inpString);
+}
+}
+
+vector<string> AddRestaurant(vector<string> restaurantNames) {
+unsigned int i;
+string newRestaurant;
+cout << "What is the name of the restaurant you want to add ?" << endl;
+GetLineNotWS(newRestaurant);
+if (restaurantNames.size() == 0) {
+restaurantNames.push_back(newRestaurant);
+}
+else {
+for (i = 0; i < restaurantNames.size(); i++) {
+if (restaurantNames.at(i) != newRestaurant) {
+restaurantNames.push_back(newRestaurant);
+}
+else {
+cout << "That restaurant is already in the list, you can not add it again." << endl;
+}
+}
+}
+return restaurantNames;
+}
+void DisplayRestaurants(vector<string> restaurantNames) {
+unsigned int i;
+cout << "Here are the current restaurants: " << endl << endl;
+for (i = 0; i < restaurantNames.size(); i++) {
+cout << "\t" << "\"" << restaurantNames.at(i) << "\"" << endl;
+}
+}
+
+int main() {
+
+string userOption;
+string newName;
+const string USER_SELECTION_OPTIONS = "options";
+const string USER_SELECTION_QUIT = "quit";
+const string USER_SELECTION_ADD = "add";
+const string USER_SELECTION_DISPLAY = "display";
+vector<string> listOfRestaurants;
+
+cout << "Welcome to the restaurant battle!  Enter \"options\" to see options." << endl << endl;
+cout << "Enter your selection: " << endl;
+cin >> userOption;
+while (userOption != USER_SELECTION_QUIT) {
+if (userOption == USER_SELECTION_OPTIONS) {
+cout << "Please select one of the following options :" << endl << endl;
+cout << "quit - Quit the program" << endl;
+cout << "display - Display all restaurants" << endl;
+cout << "add - Add a restaurant" << endl;
+cout << "remove - Remove a restaurant" << endl;
+cout << "cut - \"Cut\" the list of restaurants" << endl;
+cout << "shuffle - \"Shuffle\" the list of restaurants" << endl;
+cout << "battle - Begin the tournament" << endl;
+cout << "options - Print the options menu" << endl;
+}
+else if (userOption == USER_SELECTION_ADD) {
+listOfRestaurants = AddRestaurant(listOfRestaurants);
+}
+else if (userOption == USER_SELECTION_DISPLAY) {
+
+DisplayRestaurants(listOfRestaurants);
+
+}
+else {
+cout << "Invalid Selection" << endl;
+cout << "Please select one of the following options :" << endl << endl;
+cout << "quit - Quit the program" << endl;
+cout << "display - Display all restaurants" << endl;
+cout << "add - Add a restaurant" << endl;
+cout << "remove - Remove a restaurant" << endl;
+cout << "cut - \"Cut\" the list of restaurants" << endl;
+cout << "shuffle - \"Shuffle\" the list of restaurants" << endl;
+cout << "battle - Begin the tournament" << endl;
+cout << "options - Print the options menu" << endl;
+}
+cout << "Enter your selection:" << endl;
+cin >> userOption;
+}
+cout << "Goodbye!" << endl;
+//system("Pause");
+return 0;
+}
